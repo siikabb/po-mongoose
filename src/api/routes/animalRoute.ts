@@ -3,6 +3,7 @@ import {
   deleteAnimal,
   getAnimal,
   getAnimals,
+  getAnimalsByBox,
   postAnimal,
   putAnimal,
 } from '../controllers/animalController';
@@ -10,6 +11,8 @@ import {
 const router = express.Router();
 
 router.route('/').post(postAnimal).get(getAnimals);
+
+router.route('/location').get(getAnimalsByBox);
 
 router.route('/:id').get(getAnimal).put(putAnimal).delete(deleteAnimal);
 
