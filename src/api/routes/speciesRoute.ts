@@ -6,10 +6,11 @@ import {
   postSpecies,
   putSpecies,
 } from '../controllers/speciesController';
+import {addImageToSpecies} from '../../middlewares';
 
 const router = express.Router();
 
-router.route('/').post(postSpecies).get(getSpecies);
+router.route('/').post(addImageToSpecies, postSpecies).get(getSpecies);
 
 router.route('/:id').get(getSpeciesById).put(putSpecies).delete(deleteSpecies);
 

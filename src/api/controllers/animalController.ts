@@ -17,7 +17,7 @@ const postAnimal = async (
     const newAnimal = new AnimalModel(req.body);
     const savedAnimal = await newAnimal.save();
 
-    res.json({
+    res.status(201).json({
       message: 'Animal created successfully',
       data: savedAnimal,
     });
@@ -126,6 +126,20 @@ const getAnimalsByBox = async (
   }
 };
 
+const getBySpecies = async (
+  req: Request<{species: string}>,
+  res: Response<Animal[]>,
+  next: NextFunction,
+) => {
+  try {
+    const animals = await AnimalModel.findBySpecies(req.params.species);
+
+    res.json(animals);
+  } catch (error) {
+    next(new CustomError((error as Error).message, 500));
+  }
+};
+
 export {
   postAnimal,
   getAnimals,
@@ -133,4 +147,5 @@ export {
   putAnimal,
   deleteAnimal,
   getAnimalsByBox,
+  getBySpecies,
 };
