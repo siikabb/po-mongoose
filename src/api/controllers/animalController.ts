@@ -32,7 +32,16 @@ const getAnimals = async (
   next: NextFunction,
 ) => {
   try {
-    const animals = await AnimalModel.find();
+    const animals = await AnimalModel.find()
+      .select('-__v')
+      .populate({
+        path: 'species',
+        select: '-__v',
+        populate: {
+          path: 'category',
+          select: '-__v',
+        },
+      });
 
     res.json(animals);
   } catch (error) {
@@ -46,7 +55,16 @@ const getAnimal = async (
   next: NextFunction,
 ) => {
   try {
-    const animal = await AnimalModel.findById(req.params.id);
+    const animal = await AnimalModel.findById(req.params.id)
+      .select('-__v')
+      .populate({
+        path: 'species',
+        select: '-__v',
+        populate: {
+          path: 'category',
+          select: '-__v',
+        },
+      });
 
     if (!animal) {
       return next(new CustomError('Animal not found', 404));
@@ -118,7 +136,16 @@ const getAnimalsByBox = async (
           $box: [topRight.split(','), bottomLeft.split(',')],
         },
       },
-    });
+    })
+      .select('-__v')
+      .populate({
+        path: 'species',
+        select: '-__v',
+        populate: {
+          path: 'category',
+          select: '-__v',
+        },
+      });
 
     res.json(animals);
   } catch (error) {

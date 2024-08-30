@@ -5,14 +5,17 @@ const animalSchema = new mongoose.Schema({
   animal_name: {
     type: String,
     required: true,
+    unique: true,
     minlength: 2,
   },
   birthdate: {
     type: Date,
     required: true,
+    max: Date.now(),
   },
   species: {
     type: mongoose.Types.ObjectId,
+    ref: 'Species',
     required: true,
   },
   location: {
@@ -37,12 +40,12 @@ animalSchema.statics.findBySpecies = function (
         from: 'species',
         localField: 'species',
         foreignField: '_id',
-        as: 'species_info',
+        as: 'species',
       },
     },
     {
       $match: {
-        'species_info.species_name': species_name,
+        'species.species_name': species_name,
       },
     },
   ]);
