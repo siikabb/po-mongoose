@@ -5,7 +5,7 @@ const getWikiImage = async (name: string): Promise<string> => {
   const response = await fetch(url);
   const data = (await response.json()) as WikiImage;
   if (!data.query.pages[0].thumbnail) {
-    throw new Error('No species in Wikipedia');
+    return 'https://placecats.com/300/200';
   }
   const image = data.query.pages[0].thumbnail.source;
   return image;

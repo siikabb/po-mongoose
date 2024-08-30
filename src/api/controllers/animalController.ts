@@ -114,7 +114,7 @@ const deleteAnimal = async (
     }
 
     res.json({
-      message: 'Animal deleted successfully',
+      message: 'Animal deleted',
       data: deletedAnimal,
     });
   } catch (error) {

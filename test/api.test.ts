@@ -100,7 +100,7 @@ describe('GET /api/v1', () => {
     }
     speciesResponse = await postSpecies(
       app,
-      'Lion',
+      'Lion' + randomstring.generate(5),
       categoryResponse.data._id,
       {
         type: 'Point',
@@ -208,7 +208,7 @@ describe('GET /api/v1', () => {
   });
 
   // delete test data
-  /*
+
   it('Should delete a category', async () => {
     if (Array.isArray(categoryResponse.data)) {
       return;
@@ -229,5 +229,4 @@ describe('GET /api/v1', () => {
     }
     await deleteAnimal(app, animalResponse.data._id);
   });
-  */
 });

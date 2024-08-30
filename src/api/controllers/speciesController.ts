@@ -19,7 +19,7 @@ const postSpecies = async (
     const savedSpecies = await newSpecies.save();
 
     res.status(201).json({
-      message: 'Species created successfully',
+      message: 'Species created',
       data: savedSpecies,
     });
   } catch (error) {
@@ -76,7 +76,7 @@ const putSpecies = async (
     }
 
     res.json({
-      message: 'Species updated successfully',
+      message: 'Species updated',
       data: updatedSpecies,
     });
   } catch (error) {
@@ -97,7 +97,7 @@ const deleteSpecies = async (
     }
 
     res.json({
-      message: 'Species deleted successfully',
+      message: 'Species deleted',
       data: deletedSpecies,
     });
   } catch (error) {
